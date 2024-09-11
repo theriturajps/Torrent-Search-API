@@ -36,24 +36,24 @@ $ npm start
 
 | Website        | Keyword                                        | Url                               | Example                                                                                         |
 | -------------- | ---------------------------------------------- | --------------------------------- | ----------------------------------------------------------------------------------------------- |
-| 1337x          | 1337x                                          | <https://1337xx.to>                 | [/api/1337x/avengers](https://torrents-api.ryukme.repl.co/api/1337x/avengers)                   |
-| Yts            | yts                                            | <https://yts.mx>                    | [/api/yts/avengers](https://torrents-api.ryukme.repl.co/api/yts/avengers)                       |
-| Eztv           | eztv                                           | <https://eztv.re>                   | [/api/eztv/avengers](https://torrents-api.ryukme.repl.co/api/eztv/avengers)                     |
-| Torrent Galaxy | tgx                                            | <https://torrentgalaxy.to>          | [/api/tgx/avengers](https://torrents-api.ryukme.repl.co/api/tgx/avengers)                       |
-| Torlock        | torlock                                        | <https://www.torlock.com>           | [/api/torlock/avengers](https://torrents-api.ryukme.repl.co/api/torlock/avengers)               |
-| PirateBay      | piratebay                                      | <https://thehiddenbay.com>          | [/api/piratebay/avengers](https://torrents-api.ryukme.repl.co/api/piratebay/avengers)           |
-| Nyaasi      | nyaasi                                         | <https://nyaa.si>                   | [/api/nyaasi/umaru](https://torrents-api.ryukme.repl.co/api/nyaasi/umaru)                       |
-| Rarbg          | rarbg                                          | <https://rargb.to>                  | [/api/rarbg/avengers](https://torrents-api.ryukme.repl.co/api/rarbg/avengers)                   |
-| Ettv           | ettv                                           | <https://www.ettvcentral.com>       | [/api/ettv/avengers](https://torrents-api.ryukme.repl.co/api/ettv/avengers)                     |
-| Zooqle         | zooqle                                         | <https://zooqle.com>                | [/api/zooqle/avengers](https://torrents-api.ryukme.repl.co/api/zooqle/avengers)                 |
-| KickAss        | kickass                                        | <https://kickasstorrents.to>        | [/api/kickass/avengers](https://torrents-api.ryukme.repl.co/api/kickass/avengers)               |
-| Bitsearch      | bitsearch                                      | <https://bitsearch.to>              | [/api/bitsearch/avengers](https://torrents-api.ryukme.repl.co/api/bitsearch/avengers)           |
-| Glodls         | glodls                                         | <https://glodls.to/home.php>        | [/api/glodls/avengers](https://torrents-api.ryukme.repl.co/api/glodls/avengers)                 |
-| MagnetDL       | magnetdl                                       | <https://www.magnetdl.com>          | [/api/magnetdl/avengers](https://torrents-api.ryukme.repl.co/api/magnetdl/avengers)             |
-| LimeTorrent    | limetorrent                                    | <https://www.limetorrents.pro/home> | [/api/limetorrent/avengers](https://torrents-api.ryukme.repl.co/api/limetorrent/avengers)       |
-| TorrentFunk    | torrentfunk                                    | <https://www.torrentfunk.com>       | [/api/torrentfunk/avengers](https://torrents-api.ryukme.repl.co/api/torrentfunk/avengers)       |
-| TorrentProject | torrentproject                                 | <https://torrentproject2.com>       | [/api/torrentproject/avengers](https://torrents-api.ryukme.repl.co/api/torrentproject/avengers) |
-| all            | all (It will retrieve torrent from every site) |                                   | [/api/all/avengers](https://torrents-api.ryukme.repl.co/api/all/avengers)                       |
+| 1337x          | 1337x                                          | <https://1337xx.to>                 | [/api/1337x/avengers](https://itorrentsearch.vercel.app/api/1337x/avengers)                   |
+| Yts            | yts                                            | <https://yts.mx>                    | [/api/yts/avengers](https://itorrentsearch.vercel.app/api/yts/avengers)                       |
+| Eztv           | eztv                                           | <https://eztv.re>                   | [/api/eztv/avengers](https://itorrentsearch.vercel.app/api/eztv/avengers)                     |
+| Torrent Galaxy | tgx                                            | <https://torrentgalaxy.to>          | [/api/tgx/avengers](https://itorrentsearch.vercel.app/api/tgx/avengers)                       |
+| Torlock        | torlock                                        | <https://www.torlock.com>           | [/api/torlock/avengers](https://itorrentsearch.vercel.app/api/torlock/avengers)               |
+| PirateBay      | piratebay                                      | <https://thehiddenbay.com>          | [/api/piratebay/avengers](https://itorrentsearch.vercel.app/api/piratebay/avengers)           |
+| Nyaasi      | nyaasi                                         | <https://nyaa.si>                   | [/api/nyaasi/umaru](https://itorrentsearch.vercel.app/api/nyaasi/umaru)                       |
+| Rarbg          | rarbg                                          | <https://rargb.to>                  | [/api/rarbg/avengers](https://itorrentsearch.vercel.app/api/rarbg/avengers)                   |
+| Ettv           | ettv                                           | <https://www.ettvcentral.com>       | [/api/ettv/avengers](https://itorrentsearch.vercel.app/api/ettv/avengers)                     |
+| Zooqle         | zooqle                                         | <https://zooqle.com>                | [/api/zooqle/avengers](https://itorrentsearch.vercel.app/api/zooqle/avengers)                 |
+| KickAss        | kickass                                        | <https://kickasstorrents.to>        | [/api/kickass/avengers](https://itorrentsearch.vercel.app/api/kickass/avengers)               |
+| Bitsearch      | bitsearch                                      | <https://bitsearch.to>              | [/api/bitsearch/avengers](https://itorrentsearch.vercel.app/api/bitsearch/avengers)           |
+| Glodls         | glodls                                         | <https://glodls.to/home.php>        | [/api/glodls/avengers](https://itorrentsearch.vercel.app/api/glodls/avengers)                 |
+| MagnetDL       | magnetdl                                       | <https://www.magnetdl.com>          | [/api/magnetdl/avengers](https://itorrentsearch.vercel.app/api/magnetdl/avengers)             |
+| LimeTorrent    | limetorrent                                    | <https://www.limetorrents.pro/home> | [/api/limetorrent/avengers](https://itorrentsearch.vercel.app/api/limetorrent/avengers)       |
+| TorrentFunk    | torrentfunk                                    | <https://www.torrentfunk.com>       | [/api/torrentfunk/avengers](https://itorrentsearch.vercel.app/api/torrentfunk/avengers)       |
+| TorrentProject | torrentproject                                 | <https://torrentproject2.com>       | [/api/torrentproject/avengers](https://itorrentsearch.vercel.app/api/torrentproject/avengers) |
+| all            | all (It will retrieve torrent from every site) |                                   | [/api/all/avengers](https://itorrentsearch.vercel.app/api/all/avengers)                       |
 
 ---
 
