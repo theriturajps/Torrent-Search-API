@@ -1,0 +1,23 @@
+{
+  "name": "Torrent-Search-API",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js",
+    "start-server": "node app.js"
+  },
+  "keywords": [],
+  "author": "theriturajps",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.4",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6"
+  },
+  "devDependencies": {},
+  "description": ""
+}

@@ -1,0 +1,25 @@
+{
+    "version": 2,
+    "env": {},
+    "builds": [
+      {
+        "src": "app.js",
+        "use": "@vercel/node",
+        "config": { "includeFiles": ["/torrent/**"] }
+      }
+    ],
+    "routes": [
+      {
+        "src": "/api/(.*)",
+        "dest": "app.js"
+      },
+      {
+        "src": "/",
+        "dest": "app.js"
+      },
+      {
+        "src": "/arc-sw.js",
+        "dest": "https://arc.io/arc-sw.js"
+      }
+    ]
+  }
