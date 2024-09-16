@@ -4,16 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Movie Search</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Futuristic Movie Search</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #1a1a2e;
-            --secondary-color: #16213e;
-            --accent-color: #0f3460;
-            --text-color: #e94560;
-            --light-text: #f1f1f1;
+            --primary-bg: #0a0e17;
+            --secondary-bg: #1a1f2e;
+            --accent-color: #00f7ff;
+            --text-color: #ffffff;
+            --highlight-color: #ff00a6;
         }
 
         * {
@@ -23,9 +23,9 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--primary-color);
-            color: var(--light-text);
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
             line-height: 1.6;
         }
 
@@ -36,9 +36,9 @@
         }
 
         header {
-            background: linear-gradient(rgba(26, 26, 46, 0.8), rgba(26, 26, 46, 0.8)), 
-                        url('https://via.placeholder.com/1920x600.png?text=Movie+Search') no-repeat center center/cover;
-            height: 60vh;
+            background: linear-gradient(135deg, rgba(10, 14, 23, 0.9) 0%, rgba(26, 31, 46, 0.9) 100%), 
+                        url('https://via.placeholder.com/1920x1080.png?text=Futuristic+Movie+Search') no-repeat center center/cover;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -48,10 +48,12 @@
         }
 
         header h1 {
-            font-size: 3.5rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
             font-weight: 700;
             margin-bottom: 20px;
-            color: var(--text-color);
+            color: var(--accent-color);
+            text-shadow: 0 0 10px var(--accent-color);
         }
 
         .search-form {
@@ -60,39 +62,73 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            background: var(--secondary-color);
+            background: rgba(26, 31, 46, 0.8);
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            border-radius: 50px;
+            box-shadow: 0 0 20px rgba(0, 247, 255, 0.3);
         }
 
         .search-form input,
-        .search-form select,
+        .search-form .select-wrapper,
         .search-form button {
             margin: 10px;
-            padding: 12px;
             border: none;
-            border-radius: 5px;
+            border-radius: 25px;
             font-size: 1rem;
         }
 
         .search-form input,
-        .search-form select {
+        .search-form .select-wrapper {
             flex: 1 1 200px;
-            background-color: var(--accent-color);
-            color: var(--light-text);
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            padding: 12px 20px;
+        }
+
+        .search-form input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .select-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .select-wrapper::after {
+            content: '\25BC';
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: var(--accent-color);
+        }
+
+        .search-form select {
+            appearance: none;
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            width: 100%;
+            padding: 12px 20px;
+            padding-right: 40px;
+            border-radius: 25px;
+            cursor: pointer;
         }
 
         .search-form button {
             flex: 1 1 100px;
-            background-color: var(--text-color);
-            color: var(--light-text);
+            background-color: var(--highlight-color);
+            color: var(--text-color);
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
+            padding: 12px 20px;
         }
 
         .search-form button:hover {
-            background-color: #d13652;
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            transform: scale(1.05);
         }
 
         .movie-container {
@@ -103,53 +139,68 @@
         }
 
         .movie-card {
-            background-color: var(--secondary-color);
-            border-radius: 10px;
+            background-color: var(--secondary-bg);
+            border-radius: 15px;
             overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
         .movie-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 247, 255, 0.2);
         }
 
         .movie-card img {
             width: 100%;
-            height: 300px;
+            height: 350px;
             object-fit: cover;
         }
 
         .movie-info {
             padding: 20px;
+            background: linear-gradient(0deg, var(--secondary-bg) 0%, rgba(26, 31, 46, 0.8) 100%);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .movie-card:hover .movie-info {
+            transform: translateY(0);
         }
 
         .movie-info h5 {
+            font-family: 'Orbitron', sans-serif;
             font-size: 1.2rem;
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 10px;
-            color: var(--text-color);
+            color: var(--accent-color);
         }
 
         .movie-info p {
             font-size: 0.9rem;
             margin-bottom: 8px;
-            color: var(--light-text);
+            color: var(--text-color);
         }
 
         .btn-custom {
             display: inline-block;
-            background-color: var(--text-color);
-            color: var(--light-text);
+            background-color: var(--highlight-color);
+            color: var(--text-color);
             padding: 8px 16px;
-            border-radius: 5px;
+            border-radius: 20px;
             text-decoration: none;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
             margin-top: 10px;
         }
 
         .btn-custom:hover {
-            background-color: #d13652;
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            transform: scale(1.05);
         }
 
         @media (max-width: 768px) {
@@ -159,10 +210,11 @@
 
             .search-form {
                 flex-direction: column;
+                border-radius: 25px;
             }
 
             .search-form input,
-            .search-form select,
+            .search-form .select-wrapper,
             .search-form button {
                 width: 100%;
                 margin: 5px 0;
@@ -173,13 +225,15 @@
 
 <body>
     <header>
-        <h1>Modern Movie Search</h1>
+        <h1>Futuristic Movie Search</h1>
         <div class="search-form">
             <input type="text" id="query" placeholder="Enter movie name...">
-            <select id="website">
-                <option value="1337x">1337x</option>
-                <option value="yts">YTS</option>
-            </select>
+            <div class="select-wrapper">
+                <select id="website">
+                    <option value="1337x">1337x</option>
+                    <option value="yts">YTS</option>
+                </select>
+            </div>
             <input type="number" id="page" placeholder="Page (optional)" min="1">
             <button onClick="searchTorrents()"><i class="fas fa-search"></i> Search</button>
         </div>
@@ -198,7 +252,7 @@
             const website = $('#website').val();
             const page = $('#page').val() || '';
             const resultsDiv = $('#results');
-            resultsDiv.html('<div class="text-center" style="grid-column: 1 / -1;">Loading...</div>');
+            resultsDiv.html('<div style="grid-column: 1 / -1; text-align: center;">Searching the galaxy...</div>');
 
             let apiUrl = `https://itorrentsearch.vercel.app/api/${website}/${query}`;
             if (page) {
@@ -210,7 +264,7 @@
                 const data = await response.json();
 
                 if (!data || data.length === 0) {
-                    resultsDiv.html('<div class="text-center" style="grid-column: 1 / -1;">No results found.</div>');
+                    resultsDiv.html('<div style="grid-column: 1 / -1; text-align: center;">No results found in this universe.</div>');
                     return;
                 }
 
@@ -220,6 +274,7 @@
                     data.forEach(torrent => {
                         resultsDiv.append(`
                             <div class="movie-card">
+                                <img src="https://via.placeholder.com/350x500.png?text=${encodeURIComponent(torrent.Name)}" alt="${torrent.Name}">
                                 <div class="movie-info">
                                     <h5>${torrent.Name}</h5>
                                     <p><strong>Category:</strong> ${torrent.Category || 'N/A'}</p>
@@ -251,7 +306,7 @@
                     });
                 }
             } catch (error) {
-                resultsDiv.html('<div class="text-center text-danger" style="grid-column: 1 / -1;">Failed to load results.</div>');
+                resultsDiv.html('<div style="grid-column: 1 / -1; text-align: center; color: var(--highlight-color);">Failed to load results. The space-time continuum may be disrupted.</div>');
             }
         }
     </script>
