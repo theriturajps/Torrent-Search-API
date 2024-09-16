@@ -1,105 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Search Platform</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
-            padding: 20px;
-        }
-        header {
-            background: #222;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #111;
             color: #fff;
-            padding: 20px;
-            text-align: center;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-        header h1 {
             margin: 0;
-            font-size: 2.5rem;
+            padding: 0;
         }
+
+        header {
+            background: url('https://via.placeholder.com/1920x600.png?text=Movie+Search') no-repeat center center/cover;
+            height: 50vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
         .search-form {
-            margin-bottom: 20px;
+            max-width: 800px;
+            margin: -50px auto 30px;
+            display: flex;
+            background: #222;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
+
         .search-form input,
         .search-form select,
         .search-form button {
             margin-right: 10px;
         }
+
         .search-form input,
         .search-form select {
-            border-radius: 5px;
-        }
-        .search-form button {
-            border-radius: 5px;
-            background-color: #007BFF;
-            color: white;
             border: none;
+            border-radius: 5px;
+            padding: 12px;
+        }
+
+        .search-form button {
+            padding: 12px 20px;
+            background-color: #e50914;
+            border: none;
+            border-radius: 5px;
+            color: white;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
+
         .search-form button:hover {
-            background-color: #0056b3;
+            background-color: #b00610;
         }
-        .result-card {
-            margin-bottom: 20px;
+
+        .movie-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .movie-card {
+            background-color: #222;
             border: none;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
         }
-        .poster-img {
+
+        .movie-card:hover {
+            transform: scale(1.05);
+        }
+
+        .movie-card img {
             width: 100%;
             height: auto;
             object-fit: cover;
         }
-        .card-body {
+
+        .movie-info {
             padding: 20px;
-            background-color: #fff;
         }
-        .card-title {
-            font-size: 1.5rem;
+
+        .movie-info h5 {
+            font-size: 1.4rem;
+            font-weight: 500;
             margin-bottom: 10px;
         }
-        .card-text {
-            margin-bottom: 10px;
+
+        .movie-info p {
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            color: #ddd;
         }
+
         .btn-custom {
-            background-color: #28a745;
+            background-color: #e50914;
             color: white;
             border: none;
             border-radius: 5px;
-            margin-right: 10px;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
         }
+
         .btn-custom:hover {
-            background-color: #218838;
+            background-color: #b00610;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            .search-form {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-form input,
+            .search-form select,
+            .search-form button {
+                margin-right: 0;
+                margin-bottom: 10px;
+                width: 100%;
+            }
         }
     </style>
 </head>
+
 <body>
     <header>
-        <h1>Movie Search Platform</h1>
+        <h1>Find Your Movie</h1>
     </header>
 
     <div class="container">
-        <div class="search-form d-flex flex-column flex-md-row align-items-center">
-            <input type="text" id="query" class="form-control mb-2 mb-md-0" placeholder="Enter movie name...">
-            <select id="website" class="form-select mb-2 mb-md-0 ms-md-2">
+        <div class="search-form">
+            <input type="text" id="query" class="form-control" placeholder="Enter movie name...">
+            <select id="website" class="form-select">
                 <option value="1337x">1337x</option>
                 <option value="yts">YTS</option>
-                <!-- Add other sites as needed -->
             </select>
-            <input type="number" id="page" class="form-control mb-2 mb-md-0 ms-md-2" placeholder="Page (optional)" min="1">
-            <button class="btn btn-custom ms-md-2" onClick="searchTorrents()">Search</button>
+            <input type="number" id="page" class="form-control" placeholder="Page (optional)" min="1">
+            <button onClick="searchTorrents()">Search</button>
         </div>
 
-        <div id="results" class="row">
+        <div id="results" class="movie-container row">
             <!-- Results will be displayed here -->
         </div>
     </div>
@@ -110,11 +178,10 @@
         async function searchTorrents() {
             const query = $('#query').val();
             const website = $('#website').val();
-            const page = $('#page').val() || ''; // Get the page number or default to empty
+            const page = $('#page').val() || '';
             const resultsDiv = $('#results');
             resultsDiv.html('<div class="text-center col-12">Loading...</div>');
 
-            // Construct the URL with optional page parameter
             let apiUrl = `https://itorrentsearch.vercel.app/api/${website}/${query}`;
             if (page) {
                 apiUrl += `/${page}`;
@@ -124,27 +191,24 @@
                 const response = await fetch(apiUrl);
                 const data = await response.json();
 
-                // Handle no data scenario
                 if (!data || data.length === 0) {
                     resultsDiv.html('<div class="text-center col-12">No results found.</div>');
                     return;
                 }
 
-                // Clear previous results
                 resultsDiv.empty();
 
-                // Display results based on the selected website
                 if (website === '1337x') {
                     data.forEach(torrent => {
                         resultsDiv.append(`
                             <div class="col-md-4">
-                                <div class="card result-card">
-                                    <div class="card-body">
-                                        <h5 class="card-title">${torrent.Name}</h5>
-                                        <p class="card-text"><strong>Category:</strong> ${torrent.Category || 'N/A'}</p>
-                                        <p class="card-text"><strong>Size:</strong> ${torrent.Size || 'N/A'}</p>
-                                        <p class="card-text"><strong>Seeders:</strong> ${torrent.Seeders || 'N/A'}</p>
-                                        <p class="card-text"><strong>Leechers:</strong> ${torrent.Leechers || 'N/A'}</p>
+                                <div class="card movie-card">
+                                    <div class="movie-info">
+                                        <h5>${torrent.Name}</h5>
+                                        <p><strong>Category:</strong> ${torrent.Category || 'N/A'}</p>
+                                        <p><strong>Size:</strong> ${torrent.Size || 'N/A'}</p>
+                                        <p><strong>Seeders:</strong> ${torrent.Seeders || 'N/A'}</p>
+                                        <p><strong>Leechers:</strong> ${torrent.Leechers || 'N/A'}</p>
                                         <a href="${torrent.Magnet}" class="btn btn-custom">Download Magnet</a>
                                     </div>
                                 </div>
@@ -155,28 +219,19 @@
                     data.forEach(movie => {
                         resultsDiv.append(`
                             <div class="col-md-4">
-                                <div class="card result-card">
-                                    <img src="${movie.Poster}" alt="${movie.Name}" class="card-img-top poster-img">
-                                    <div class="card-body">
-                                        <h5 class="card-title">${movie.Name}</h5>
-                                        <p class="card-text"><strong>Released Date:</strong> ${movie.ReleasedDate || 'N/A'}</p>
-                                        <p class="card-text"><strong>Genre:</strong> ${movie.Genre || 'N/A'}</p>
-                                        <p class="card-text"><strong>Rating:</strong> ${movie.Rating || 'N/A'}</p>
-                                        <p class="card-text"><strong>Likes:</strong> ${movie.Likes || 'N/A'}</p>
-                                        <p class="card-text"><strong>Runtime:</strong> ${movie.Runtime || 'N/A'}</p>
-                                        <p class="card-text"><strong>Language:</strong> ${movie.Language || 'N/A'}</p>
+                                <div class="card movie-card">
+                                    <img src="${movie.Poster}" alt="${movie.Name}">
+                                    <div class="movie-info">
+                                        <h5>${movie.Name}</h5>
+                                        <p><strong>Released Date:</strong> ${movie.ReleasedDate || 'N/A'}</p>
+                                        <p><strong>Genre:</strong> ${movie.Genre || 'N/A'}</p>
+                                        <p><strong>Rating:</strong> ${movie.Rating || 'N/A'}</p>
+                                        <p><strong>Likes:</strong> ${movie.Likes || 'N/A'}</p>
+                                        <p><strong>Runtime:</strong> ${movie.Runtime || 'N/A'}</p>
                                         <a href="${movie.Url}" class="btn btn-custom">More Details</a>
-                                        <div class="mt-2">
-                                            ${movie.Files.map(file => `
-                                                <div class="mt-2">
-                                                    <p><strong>Quality:</strong> ${file.Quality}</p>
-                                                    <p><strong>Type:</strong> ${file.Type}</p>
-                                                    <p><strong>Size:</strong> ${file.Size}</p>
-                                                    <a href="${file.Torrent}" class="btn btn-secondary me-2">Download Torrent</a>
-                                                    <a href="${file.Magnet}" class="btn btn-secondary">Download Magnet</a>
-                                                </div>
-                                            `).join('')}
-                                        </div>
+                                        ${movie.Files.map(file => `
+                                            <a href="${file.Magnet}" class="btn btn-custom mt-2">Download ${file.Quality}</a>
+                                        `).join('')}
                                     </div>
                                 </div>
                             </div>
@@ -189,4 +244,5 @@
         }
     </script>
 </body>
+
 </html>
