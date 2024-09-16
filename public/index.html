@@ -4,40 +4,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Search Platform</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+    <title>Modern Movie Search</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #111;
-            color: #fff;
+        :root {
+            --primary-color: #1a1a2e;
+            --secondary-color: #16213e;
+            --accent-color: #0f3460;
+            --text-color: #e94560;
+            --light-text: #f1f1f1;
+        }
+
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
         header {
-            background: url('https://via.placeholder.com/1920x600.png?text=Movie+Search') no-repeat center center/cover;
-            height: 50vh;
+            background: linear-gradient(rgba(26, 26, 46, 0.8), rgba(26, 26, 46, 0.8)), 
+                        url('https://via.placeholder.com/1920x600.png?text=Movie+Search') no-repeat center center/cover;
+            height: 60vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            text-align: center;
+            padding: 0 20px;
         }
 
         header h1 {
             font-size: 3.5rem;
             font-weight: 700;
-            text-transform: uppercase;
-            margin: 0;
+            margin-bottom: 20px;
+            color: var(--text-color);
         }
 
         .search-form {
+            width: 100%;
             max-width: 800px;
-            margin: -50px auto 30px;
             display: flex;
-            background: #222;
+            flex-wrap: wrap;
+            justify-content: center;
+            background: var(--secondary-color);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
@@ -46,53 +69,54 @@
         .search-form input,
         .search-form select,
         .search-form button {
-            margin-right: 10px;
+            margin: 10px;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
         }
 
         .search-form input,
         .search-form select {
-            border: none;
-            border-radius: 5px;
-            padding: 12px;
+            flex: 1 1 200px;
+            background-color: var(--accent-color);
+            color: var(--light-text);
         }
 
         .search-form button {
-            padding: 12px 20px;
-            background-color: #e50914;
-            border: none;
-            border-radius: 5px;
-            color: white;
+            flex: 1 1 100px;
+            background-color: var(--text-color);
+            color: var(--light-text);
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
         .search-form button:hover {
-            background-color: #b00610;
+            background-color: #d13652;
         }
 
         .movie-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 50px 0;
         }
 
         .movie-card {
-            background-color: #222;
-            border: none;
+            background-color: var(--secondary-color);
             border-radius: 10px;
             overflow: hidden;
-            margin-bottom: 30px;
-            transition: transform 0.3s;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .movie-card:hover {
-            transform: scale(1.05);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
         .movie-card img {
             width: 100%;
-            height: auto;
+            height: 300px;
             object-fit: cover;
         }
 
@@ -101,33 +125,31 @@
         }
 
         .movie-info h5 {
-            font-size: 1.4rem;
-            font-weight: 500;
+            font-size: 1.2rem;
+            font-weight: 600;
             margin-bottom: 10px;
+            color: var(--text-color);
         }
 
         .movie-info p {
             font-size: 0.9rem;
             margin-bottom: 8px;
-            color: #ddd;
+            color: var(--light-text);
         }
 
         .btn-custom {
-            background-color: #e50914;
-            color: white;
-            border: none;
-            border-radius: 5px;
+            display: inline-block;
+            background-color: var(--text-color);
+            color: var(--light-text);
             padding: 8px 16px;
+            border-radius: 5px;
             text-decoration: none;
             transition: background-color 0.3s ease;
+            margin-top: 10px;
         }
 
         .btn-custom:hover {
-            background-color: #b00610;
-        }
-
-        .container {
-            margin-top: 50px;
+            background-color: #d13652;
         }
 
         @media (max-width: 768px) {
@@ -137,15 +159,13 @@
 
             .search-form {
                 flex-direction: column;
-                align-items: stretch;
             }
 
             .search-form input,
             .search-form select,
             .search-form button {
-                margin-right: 0;
-                margin-bottom: 10px;
                 width: 100%;
+                margin: 5px 0;
             }
         }
     </style>
@@ -153,34 +173,32 @@
 
 <body>
     <header>
-        <h1>Find Your Movie</h1>
-    </header>
-
-    <div class="container">
+        <h1>Modern Movie Search</h1>
         <div class="search-form">
-            <input type="text" id="query" class="form-control" placeholder="Enter movie name...">
-            <select id="website" class="form-select">
+            <input type="text" id="query" placeholder="Enter movie name...">
+            <select id="website">
                 <option value="1337x">1337x</option>
                 <option value="yts">YTS</option>
             </select>
-            <input type="number" id="page" class="form-control" placeholder="Page (optional)" min="1">
-            <button onClick="searchTorrents()">Search</button>
+            <input type="number" id="page" placeholder="Page (optional)" min="1">
+            <button onClick="searchTorrents()"><i class="fas fa-search"></i> Search</button>
         </div>
+    </header>
 
-        <div id="results" class="movie-container row">
+    <div class="container">
+        <div id="results" class="movie-container">
             <!-- Results will be displayed here -->
         </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script>
         async function searchTorrents() {
             const query = $('#query').val();
             const website = $('#website').val();
             const page = $('#page').val() || '';
             const resultsDiv = $('#results');
-            resultsDiv.html('<div class="text-center col-12">Loading...</div>');
+            resultsDiv.html('<div class="text-center" style="grid-column: 1 / -1;">Loading...</div>');
 
             let apiUrl = `https://itorrentsearch.vercel.app/api/${website}/${query}`;
             if (page) {
@@ -192,7 +210,7 @@
                 const data = await response.json();
 
                 if (!data || data.length === 0) {
-                    resultsDiv.html('<div class="text-center col-12">No results found.</div>');
+                    resultsDiv.html('<div class="text-center" style="grid-column: 1 / -1;">No results found.</div>');
                     return;
                 }
 
@@ -201,16 +219,14 @@
                 if (website === '1337x') {
                     data.forEach(torrent => {
                         resultsDiv.append(`
-                            <div class="col-md-4">
-                                <div class="card movie-card">
-                                    <div class="movie-info">
-                                        <h5>${torrent.Name}</h5>
-                                        <p><strong>Category:</strong> ${torrent.Category || 'N/A'}</p>
-                                        <p><strong>Size:</strong> ${torrent.Size || 'N/A'}</p>
-                                        <p><strong>Seeders:</strong> ${torrent.Seeders || 'N/A'}</p>
-                                        <p><strong>Leechers:</strong> ${torrent.Leechers || 'N/A'}</p>
-                                        <a href="${torrent.Magnet}" class="btn btn-custom">Download Magnet</a>
-                                    </div>
+                            <div class="movie-card">
+                                <div class="movie-info">
+                                    <h5>${torrent.Name}</h5>
+                                    <p><strong>Category:</strong> ${torrent.Category || 'N/A'}</p>
+                                    <p><strong>Size:</strong> ${torrent.Size || 'N/A'}</p>
+                                    <p><strong>Seeders:</strong> ${torrent.Seeders || 'N/A'}</p>
+                                    <p><strong>Leechers:</strong> ${torrent.Leechers || 'N/A'}</p>
+                                    <a href="${torrent.Magnet}" class="btn-custom">Download Magnet</a>
                                 </div>
                             </div>
                         `);
@@ -218,28 +234,24 @@
                 } else if (website === 'yts') {
                     data.forEach(movie => {
                         resultsDiv.append(`
-                            <div class="col-md-4">
-                                <div class="card movie-card">
-                                    <img src="${movie.Poster}" alt="${movie.Name}">
-                                    <div class="movie-info">
-                                        <h5>${movie.Name}</h5>
-                                        <p><strong>Released Date:</strong> ${movie.ReleasedDate || 'N/A'}</p>
-                                        <p><strong>Genre:</strong> ${movie.Genre || 'N/A'}</p>
-                                        <p><strong>Rating:</strong> ${movie.Rating || 'N/A'}</p>
-                                        <p><strong>Likes:</strong> ${movie.Likes || 'N/A'}</p>
-                                        <p><strong>Runtime:</strong> ${movie.Runtime || 'N/A'}</p>
-                                        <a href="${movie.Url}" class="btn btn-custom">More Details</a>
-                                        ${movie.Files.map(file => `
-                                            <a href="${file.Magnet}" class="btn btn-custom mt-2">Download ${file.Quality}</a>
-                                        `).join('')}
-                                    </div>
+                            <div class="movie-card">
+                                <img src="${movie.Poster}" alt="${movie.Name}">
+                                <div class="movie-info">
+                                    <h5>${movie.Name}</h5>
+                                    <p><strong>Released:</strong> ${movie.ReleasedDate || 'N/A'}</p>
+                                    <p><strong>Genre:</strong> ${movie.Genre || 'N/A'}</p>
+                                    <p><strong>Rating:</strong> ${movie.Rating || 'N/A'}</p>
+                                    <a href="${movie.Url}" class="btn-custom">More Details</a>
+                                    ${movie.Files.map(file => `
+                                        <a href="${file.Magnet}" class="btn-custom">Download ${file.Quality}</a>
+                                    `).join('')}
                                 </div>
                             </div>
                         `);
                     });
                 }
             } catch (error) {
-                resultsDiv.html('<div class="text-center text-danger col-12">Failed to load results.</div>');
+                resultsDiv.html('<div class="text-center text-danger" style="grid-column: 1 / -1;">Failed to load results.</div>');
             }
         }
     </script>
