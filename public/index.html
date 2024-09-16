@@ -1,1 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Torrent Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
 
+        .search-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        select, input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .results {
+            margin-top: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .torrent-item {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .torrent-item h3 {
+            margin: 0 0 10px 0;
+        }
+
+        .magnet-link {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .magnet-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="search-container">
+    <h1>Torrent Search</h1>
+    <label for="keyword">Select Website:</label>
+    <select id="keyword">
+        <option value="1337x">1337x</option>
+        <option value="yts">YTS</option>
+        <option value="eztv">EZTV</option>
+        <option value="tgx">TorrentGalaxy</option>
+        <option value="torlock">Torlock</option>
+        <option value="piratebay">Pirate Bay</option>
+        <option value="nyaasi">NyaaSi</option>
+        <option value="rarbg">RARBG</option>
+        <option value="ettv">ETTV</option>
+        <option value="zooqle">Zooqle</option>
+        <option value="kickass">Kickass</option>
+        <option value="bitsearch">Bitsearch</option>
+        <option value="glodls">GloDLs</option>
+        <option value="magnetdl">MagnetDL</option>
+        <option value="limetorrent">LimeTorrent</option>
+        <option value="torrentfunk">TorrentFunk</option>
+        <option value="torrentproject">TorrentProject</option>
+    </select>
+
+    <label for="query">Search Query:</label>
+    <input type="text" id="query" placeholder="Enter movie or file name" />
+
+    <label for="page">Page (Optional):</label>
+    <input type="number" id="page" placeholder="Enter page number (optional)" />
+
+    <button onclick="searchTorrent()">Search</button>
+
+    <div class="results" id="results"></div>
+</div>
+
+<script>
+    async function searchTorrent() {
+        const keyword = document.getElementById('keyword').value;
+        const query = document.getElementById('query').value;
+        const page = document.getElementById('page').value || 1;
+        const resultsDiv = document.getElementById('results');
+
+        // Clear previous results
+        resultsDiv.innerHTML = '';
+
+        // Build the API URL
+        const apiUrl = `https://itorrentsearch.vercel.app/api/${keyword}/${query}/${page}`;
+
+        try {
+            // Fetch the results from the API
+            const response = await fetch(apiUrl);
+            const data = await response.json();
+
+            if (data.error) {
+                // Display error message
+                resultsDiv.innerHTML = `<p style="color: red;">Error: ${data.error}</p>`;
+            } else {
+                // Display the results
+                data.forEach(item => {
+                    const torrentElement = document.createElement('div');
+                    torrentElement.classList.add('torrent-item');
+                    torrentElement.innerHTML = `
+                        <h3>${item.Name}</h3>
+                        <p><strong>Category:</strong> ${item.Category || 'N/A'}</p>
+                        <p><strong>Size:</strong> ${item.Size || 'N/A'}</p>
+                        <p><strong>Seeders:</strong> ${item.Seeders || 'N/A'}, <strong>Leechers:</strong> ${item.Leechers || 'N/A'}</p>
+                        <a class="magnet-link" href="${item.Magnet}" target="_blank">Download Magnet</a>
+                    `;
+                    resultsDiv.appendChild(torrentElement);
+                });
+            }
+        } catch (error) {
+            resultsDiv.innerHTML = `<p style="color: red;">Error: Failed to fetch results.</p>`;
+            console.error('Error fetching data:', error);
+        }
+    }
+</script>
+
+</body>
+</html>
