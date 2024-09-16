@@ -4,190 +4,262 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Movie Search Platform</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+    <title>Torrent Search Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #141414;
-            color: #fff;
-            margin: 0;
-            padding: 0;
-        }
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #0056b3;
+    --background-color: #f4f4f4;
+    --card-background: #fff;
+    --text-color: #333;
+    --text-secondary-color: #666;
+    --border-color: #ccc;
+    --border-radius: 5px;
+    --box-shadow-light: rgba(0, 0, 0, 0.1);
+    --box-shadow-hover: rgba(0, 0, 0, 0.2);
+    --spinner-color: #007bff;
+    --spinner-size: 50px;
+    --font-family: 'Poppins', sans-serif;
+    --font-size-base: 0.9rem;
+    --font-size-small: 0.85rem;
+    --header-font-size: 1.8rem;
+    --header-font-size-mobile: 1.5rem;
+    --max-card-height: 400px;
+}
 
-        .header {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://via.placeholder.com/1920x600.png?text=Movie+Search') no-repeat center center/cover;
-            height: 60vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
-        }
+body {
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+}
 
-        .header h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+header {
+    background-color: var(--text-color);
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 5px var(--box-shadow-light);
+}
 
-        .search-form {
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-        }
+header h1 {
+    font-size: var(--header-font-size);
+    margin: 0;
+}
 
-        .search-form input,
-        .search-form select,
-        .search-form button {
-            margin: 10px;
-            flex-grow: 1;
-        }
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px var(--box-shadow-light);
+}
 
-        .search-form input,
-        .search-form select {
-            background-color: rgba(255, 255, 255, 0.1);
-            border: none;
-            border-radius: 5px;
-            padding: 12px;
-            color: #fff;
-        }
+.search-container input,
+.search-container select {
+    padding: 10px;
+    font-size: var(--font-size-base);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    margin-right: 10px;
+    flex: 1;
+}
 
-        .search-form button {
-            padding: 12px 20px;
-            background-color: #e50914;
-            border: none;
-            border-radius: 5px;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
+.search-container button {
+    background-color: var(--primary-color);
+    padding: 10px 15px;
+    color: white;
+    font-size: var(--font-size-base);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
 
-        .search-form button:hover {
-            background-color: #f40612;
-        }
+.search-container button:hover {
+    background-color: var(--secondary-color);
+    transform: scale(1.05);
+}
 
-        .movie-container {
-            max-width: 1200px;
-            margin: 50px auto;
-            padding: 0 20px;
-        }
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 15px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+}
 
-        .movie-card {
-            background-color: #1f1f1f;
-            border: none;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-bottom: 30px;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
+.movie-card {
+    background-color: var(--card-background);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px var(--box-shadow-light);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s, box-shadow 0.3s;
+    height: 100%;
+    max-height: var(--max-card-height);
+    position: relative;
+}
 
-        .movie-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-        }
+.movie-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 16px var(--box-shadow-hover);
+}
 
-        .movie-card img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-        }
+.movie-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    transition: opacity 0.3s;
+}
 
-        .movie-info {
-            padding: 20px;
-        }
+.movie-card img:hover {
+    opacity: 0.8;
+}
 
-        .movie-info h5 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
+.movie-details {
+    padding: 10px;
+    text-align: left;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
 
-        .movie-info p {
-            font-size: 0.9rem;
-            margin-bottom: 8px;
-            color: #bbb;
-        }
+.movie-details h5 {
+    font-size: 1rem;
+    margin: 0;
+    color: var(--primary-color);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 
-        .btn-custom {
-            background-color: #e50914;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 8px 16px;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-            display: inline-block;
-            margin-top: 10px;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
+.movie-details p {
+    font-size: var(--font-size-small);
+    color: var(--text-secondary-color);
+    margin: 5px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 
-        .btn-custom:hover {
-            background-color: #f40612;
-        }
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: auto;
+    padding: 10px;
+}
 
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2.5rem;
-            }
+.btn-custom {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    display: block;
+    transition: background-color 0.3s, transform 0.2s;
+    font-size: var(--font-size-small);
+    text-align: center;
+}
 
-            .search-form {
-                flex-direction: column;
-            }
+.btn-custom:hover {
+    background-color: var(--secondary-color);
+    transform: scale(1.05);
+}
 
-            .search-form input,
-            .search-form select,
-            .search-form button {
-                width: 100%;
-                margin: 5px 0;
-            }
-        }
+.spinner-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 1000;
+}
+
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--spinner-color);
+    border-radius: 50%;
+    width: var(--spinner-size);
+    height: var(--spinner-size);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: var(--header-font-size-mobile);
+    }
+
+    .search-container {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .search-container input,
+    .search-container select,
+    .search-container button {
+        margin-bottom: 10px;
+        width: 100%;
+    }
+}
+
     </style>
 </head>
 
 <body>
-    <header class="header">
-        <h1>Movie Search</h1>
-        <div class="search-form">
-            <input type="text" id="query" class="form-control" placeholder="Enter movie name...">
-            <select id="website" class="form-select">
-                <option value="1337x">1337x</option>
-                <option value="yts">YTS</option>
-            </select>
-            <input type="number" id="page" class="form-control" placeholder="Page (optional)" min="1">
-            <button onClick="searchTorrents()">Search</button>
-        </div>
+
+    <header>
+        <h1>Ultimate Torrent Finder</h1>
     </header>
 
-    <div class="movie-container">
-        <div id="results" class="row">
-            <!-- Results will be displayed here -->
-        </div>
+    <div class="search-container">
+        <input type="text" id="query" class="form-control" placeholder="Enter torrent name...">
+        <select id="website" class="form-select">
+            <option value="1337x">1337x</option>
+            <option value="yts">YTS</option>
+        </select>
+        <input type="number" id="page" class="form-control" placeholder="Page (optional)" min="1">
+        <button onclick="searchTorrents()">Search</button>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <div id="results" class="movie-grid">
+        <!-- Movie cards will be generated here -->
+    </div>
+
+    <!-- Spinner container for loading state -->
+    <div id="spinner-container" class="spinner-container" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         async function searchTorrents() {
             const query = $('#query').val();
             const website = $('#website').val();
-            const page = $('#page').val() || '';
+            const page = $('#page').val();
             const resultsDiv = $('#results');
-            resultsDiv.html('<div class="text-center col-12">Loading...</div>');
+            const spinnerContainer = $('#spinner-container');
+
+            // Show the spinner
+            spinnerContainer.show();
 
             let apiUrl = `https://itorrentsearch.vercel.app/api/${website}/${query}`;
             if (page) {
@@ -207,47 +279,49 @@
 
                 if (website === '1337x') {
                     data.forEach(torrent => {
-                        resultsDiv.append(`
-                            <div class="col-md-4 col-sm-6">
-                                <div class="movie-card">
-                                    <div class="movie-info">
-                                        <h5>${torrent.Name}</h5>
-                                        <p><strong>Category:</strong> ${torrent.Category || 'N/A'}</p>
-                                        <p><strong>Size:</strong> ${torrent.Size || 'N/A'}</p>
-                                        <p><strong>Seeders:</strong> ${torrent.Seeders || 'N/A'}</p>
-                                        <p><strong>Leechers:</strong> ${torrent.Leechers || 'N/A'}</p>
-                                        <a href="${torrent.Magnet}" class="btn-custom">Download</a>
+                        resultsDiv.append(
+                            `<div class="movie-card">
+                                <div class="movie-details">
+                                    <h5>${torrent.Name}</h5>
+                                    <p><strong>Category:</strong> ${torrent.Category || 'N/A'}</p>
+                                    <p><strong>Size:</strong> ${torrent.Size || 'N/A'}</p>
+                                    <p><strong>Seeders:</strong> ${torrent.Seeders || 'N/A'}</p>
+                                    <div class="button-container">
+                                        <a href="${torrent.Magnet}" class="btn-custom">Magnet</a>
                                     </div>
                                 </div>
-                            </div>
-                        `);
+                            </div>`
+                        );
                     });
                 } else if (website === 'yts') {
                     data.forEach(movie => {
-                        resultsDiv.append(`
-                            <div class="col-md-4 col-sm-6">
-                                <div class="movie-card">
-                                    <img src="${movie.Poster}" alt="${movie.Name}">
-                                    <div class="movie-info">
-                                        <h5>${movie.Name}</h5>
-                                        <p><strong>Released:</strong> ${movie.ReleasedDate || 'N/A'}</p>
-                                        <p><strong>Genre:</strong> ${movie.Genre || 'N/A'}</p>
-                                        <p><strong>Rating:</strong> ${movie.Rating || 'N/A'}</p>
-                                        <a href="${movie.Url}" class="btn-custom">Details</a>
-                                        ${movie.Files.map(file => `
-                                            <a href="${file.Magnet}" class="btn-custom">${file.Quality}</a>
-                                        `).join('')}
+                        resultsDiv.append(
+                            `<div class="movie-card">
+                                <img src="${movie.Poster}" alt="${movie.Name}">
+                                <div class="movie-details">
+                                    <h5>${movie.Name}</h5>
+                                    <p><strong>Released Date:</strong> ${movie.ReleasedDate || 'N/A'}</p>
+                                    <p><strong>Genre:</strong> ${movie.Genre || 'N/A'}</p>
+                                    <p><strong>Rating:</strong> ${movie.Rating || 'N/A'}</p>
+                                    <div class="button-container">
+                                        <a href="${movie.Url}" class="btn-custom">More Details</a>
+                                        ${movie.Files.map(file => 
+                                            `<a href="${file.Magnet}" class="btn-custom">${file.Quality}</a>`
+                                        ).join('')}
                                     </div>
                                 </div>
-                            </div>
-                        `);
+                            </div>`
+                        );
                     });
                 }
             } catch (error) {
                 resultsDiv.html('<div class="text-center text-danger col-12">Failed to load results.</div>');
+            } finally {
+                spinnerContainer.hide();
             }
         }
     </script>
+
 </body>
 
 </html>
