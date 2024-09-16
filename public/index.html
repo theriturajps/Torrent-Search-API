@@ -44,6 +44,7 @@
                 <option value="yts">YTS</option>
                 <!-- Add other sites as needed -->
             </select>
+            <input type="number" id="page" class="form-control mb-2 mb-md-0 ms-md-2" placeholder="Page (optional)" min="1">
             <button class="btn btn-primary ms-md-2" onClick="searchTorrents()">Search</button>
         </div>
 
@@ -58,10 +59,16 @@
         async function searchTorrents() {
             const query = $('#query').val();
             const website = $('#website').val();
+            const page = $('#page').val() || ''; // Get the page number or default to empty
             const resultsDiv = $('#results');
             resultsDiv.html('<div class="text-center">Loading...</div>');
 
+            // Construct the URL with optional page parameter
             let apiUrl = `https://itorrentsearch.vercel.app/api/${website}/${query}`;
+            if (page) {
+                apiUrl += `/${page}`;
+            }
+
             try {
                 const response = await fetch(apiUrl);
                 const data = await response.json();
