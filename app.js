@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const scrap1337x = require('./torrent/1337x');
 const scrapNyaa = require('./torrent/nyaaSI');
 const scrapYts = require('./torrent/yts');
@@ -20,6 +21,8 @@ const torrentProject = require('./torrent/torrentProject');
 
 
 const app = express();
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/:website/:query/:page?', (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -367,8 +370,9 @@ app.use('/api/:website/:query/:page?', (req, res, next) => {
 });
 
 app.use('/', (req, res) => {
-    res.send('<h1>Welcome To Torrent Search API</h1><p>API for 1337x, NyaaSi, YTS, PirateBay, Torlock, EzTvio, TorrentGalaxy, Rarbg, Zooqle, KickAss, Bitsearch, Glodls, MagnetDL, Limetorrent, TorrentFunk, TorrentProject and Ettv Central Unoffical API</p>');
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
+
 const PORT = process.env.PORT || 3001;
 console.log('Listening on PORT : ', PORT);
 app.listen(PORT);
