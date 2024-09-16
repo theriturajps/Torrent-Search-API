@@ -9,11 +9,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-bg: #0a0e17;
-            --secondary-bg: #1a1f2e;
-            --accent-color: #00f7ff;
-            --text-color: #ffffff;
-            --highlight-color: #ff00a6;
+            --primary-color: #0a192f;
+            --secondary-color: #172a45;
+            --accent-color: #64ffda;
+            --text-color: #8892b0;
+            --light-text: #ccd6f6;
+            --neon-glow: 0 0 10px #64ffda, 0 0 20px #64ffda, 0 0 30px #64ffda;
         }
 
         * {
@@ -24,9 +25,10 @@
 
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: var(--primary-bg);
-            color: var(--text-color);
+            background-color: var(--primary-color);
+            color: var(--light-text);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         .container {
@@ -36,8 +38,8 @@
         }
 
         header {
-            background: linear-gradient(135deg, rgba(10, 14, 23, 0.9) 0%, rgba(26, 31, 46, 0.9) 100%), 
-                        url('https://via.placeholder.com/1920x1080.png?text=Futuristic+Movie+Search') no-repeat center center/cover;
+            background: linear-gradient(rgba(10, 25, 47, 0.8), rgba(10, 25, 47, 0.8)),
+                url('https://via.placeholder.com/1920x1080.png?text=Futuristic+Movie+Search') no-repeat center center/cover;
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -45,6 +47,20 @@
             align-items: center;
             text-align: center;
             padding: 0 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, var(--accent-color) 0%, transparent 100%);
+            opacity: 0.1;
+            z-index: 1;
         }
 
         header h1 {
@@ -53,7 +69,8 @@
             font-weight: 700;
             margin-bottom: 20px;
             color: var(--accent-color);
-            text-shadow: 0 0 10px var(--accent-color);
+            text-shadow: var(--neon-glow);
+            z-index: 2;
         }
 
         .search-form {
@@ -62,109 +79,142 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            background: rgba(26, 31, 46, 0.8);
-            padding: 20px;
-            border-radius: 50px;
-            box-shadow: 0 0 20px rgba(0, 247, 255, 0.3);
+            background: rgba(23, 42, 69, 0.8);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            z-index: 2;
         }
 
         .search-form input,
-        .search-form .select-wrapper,
+        .search-form .custom-select,
         .search-form button {
             margin: 10px;
+            padding: 15px;
             border: none;
-            border-radius: 25px;
+            border-radius: 10px;
             font-size: 1rem;
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+            transition: all 0.3s ease;
         }
 
         .search-form input,
-        .search-form .select-wrapper {
+        .search-form .custom-select {
             flex: 1 1 200px;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: var(--text-color);
-            padding: 12px 20px;
         }
 
-        .search-form input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .select-wrapper {
-            position: relative;
-            display: inline-block;
-        }
-
-        .select-wrapper::after {
-            content: '\25BC';
-            position: absolute;
-            top: 50%;
-            right: 15px;
-            transform: translateY(-50%);
-            pointer-events: none;
-            color: var(--accent-color);
-        }
-
-        .search-form select {
-            appearance: none;
-            background: transparent;
-            border: none;
-            color: var(--text-color);
-            width: 100%;
-            padding: 12px 20px;
-            padding-right: 40px;
-            border-radius: 25px;
-            cursor: pointer;
+        .search-form input:focus,
+        .search-form .custom-select:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--accent-color);
         }
 
         .search-form button {
             flex: 1 1 100px;
-            background-color: var(--highlight-color);
-            color: var(--text-color);
+            background-color: var(--accent-color);
+            color: var(--primary-color);
             cursor: pointer;
+            font-weight: bold;
             transition: all 0.3s ease;
-            padding: 12px 20px;
         }
 
         .search-form button:hover {
-            background-color: var(--accent-color);
-            color: var(--primary-bg);
-            transform: scale(1.05);
+            background-color: #4fd1c5;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(100, 255, 218, 0.3);
+        }
+
+        .custom-select {
+            position: relative;
+            display: inline-block;
+        }
+
+        .custom-select select {
+            display: none;
+        }
+
+        .select-selected {
+            background-color: var(--secondary-color);
+        }
+
+        .select-selected:after {
+            position: absolute;
+            content: "";
+            top: 50%;
+            right: 10px;
+            width: 0;
+            height: 0;
+            border: 6px solid transparent;
+            border-color: var(--light-text) transparent transparent transparent;
+        }
+
+        .select-selected.select-arrow-active:after {
+            border-color: transparent transparent var(--light-text) transparent;
+            top: 40%;
+        }
+
+        .select-items div,.select-selected {
+            padding: 15px;
+            border: 1px solid transparent;
+            border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .select-items {
+            position: absolute;
+            background-color: var(--secondary-color);
+            top: 100%;
+            left: 0;
+            right: 0;
+            z-index: 99;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .select-hide {
+            display: none;
+        }
+
+        .select-items div:hover, .same-as-selected {
+            background-color: rgba(0, 0, 0, 0.1);
         }
 
         .movie-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
             padding: 50px 0;
         }
 
         .movie-card {
-            background-color: var(--secondary-bg);
+            background-color: var(--secondary-color);
             border-radius: 15px;
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: transform 0.3s, box-shadow 0.3s;
             position: relative;
         }
 
         .movie-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 247, 255, 0.2);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
         }
 
         .movie-card img {
             width: 100%;
-            height: 350px;
+            height: 400px;
             object-fit: cover;
         }
 
         .movie-info {
             padding: 20px;
-            background: linear-gradient(0deg, var(--secondary-bg) 0%, rgba(26, 31, 46, 0.8) 100%);
+            background: linear-gradient(to top, var(--secondary-color) 80%, transparent);
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            transform: translateY(100%);
+            transform: translateY(70%);
             transition: transform 0.3s ease;
         }
 
@@ -174,8 +224,8 @@
 
         .movie-info h5 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 500;
+            font-size: 1.4rem;
+            font-weight: 600;
             margin-bottom: 10px;
             color: var(--accent-color);
         }
@@ -188,36 +238,42 @@
 
         .btn-custom {
             display: inline-block;
-            background-color: var(--highlight-color);
-            color: var(--text-color);
-            padding: 8px 16px;
-            border-radius: 20px;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            padding: 10px 20px;
+            border-radius: 25px;
             text-decoration: none;
             transition: all 0.3s ease;
             margin-top: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .btn-custom:hover {
-            background-color: var(--accent-color);
-            color: var(--primary-bg);
-            transform: scale(1.05);
+            background-color: #4fd1c5;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(100, 255, 218, 0.3);
         }
 
         @media (max-width: 768px) {
             header h1 {
-                font-size: 2.5rem;
+                font-size: 3rem;
             }
 
             .search-form {
                 flex-direction: column;
-                border-radius: 25px;
             }
 
             .search-form input,
-            .search-form .select-wrapper,
+            .search-form .custom-select,
             .search-form button {
                 width: 100%;
                 margin: 5px 0;
+            }
+
+            .movie-card img {
+                height: 300px;
             }
         }
     </style>
@@ -228,7 +284,7 @@
         <h1>Futuristic Movie Search</h1>
         <div class="search-form">
             <input type="text" id="query" placeholder="Enter movie name...">
-            <div class="select-wrapper">
+            <div class="custom-select">
                 <select id="website">
                     <option value="1337x">1337x</option>
                     <option value="yts">YTS</option>
@@ -247,12 +303,82 @@
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
+        // Custom select dropdown
+        var x, i, j, l, ll, selElmnt, a, b, c;
+        x = document.getElementsByClassName("custom-select");
+        l = x.length;
+        for (i = 0; i < l; i++) {
+            selElmnt = x[i].getElementsByTagName("select")[0];
+            ll = selElmnt.length;
+            a = document.createElement("DIV");
+            a.setAttribute("class", "select-selected");
+            a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+            x[i].appendChild(a);
+            b = document.createElement("DIV");
+            b.setAttribute("class", "select-items select-hide");
+            for (j = 1; j < ll; j++) {
+                c = document.createElement("DIV");
+                c.innerHTML = selElmnt.options[j].innerHTML;
+                c.addEventListener("click", function(e) {
+                    var y, i, k, s, h, sl, yl;
+                    s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+                    sl = s.length;
+                    h = this.parentNode.previousSibling;
+                    for (i = 0; i < sl; i++) {
+                        if (s.options[i].innerHTML == this.innerHTML) {
+                            s.selectedIndex = i;
+                            h.innerHTML = this.innerHTML;
+                            y = this.parentNode.getElementsByClassName("same-as-selected");
+                            yl = y.length;
+                            for (k = 0; k < yl; k++) {
+                                y[k].removeAttribute("class");
+                            }
+                            this.setAttribute("class", "same-as-selected");
+                            break;
+                        }
+                    }
+                    h.click();
+                });
+                b.appendChild(c);
+            }
+            x[i].appendChild(b);
+            a.addEventListener("click", function(e) {
+                e.stopPropagation();
+                closeAllSelect(this);
+                this.nextSibling.classList.toggle("select-hide");
+                this.classList.toggle("select-arrow-active");
+            });
+        }
+
+        function closeAllSelect(elmnt) {
+            var x, y, i, xl, yl, arrNo = [];
+            x = document.getElementsByClassName("select-items");
+            y = document.getElementsByClassName("select-selected");
+            xl = x.length;
+            yl = y.length;
+            for (i = 0; i < yl; i++) {
+                if (elmnt == y[i]) {
+                    arrNo.push(i)
+                } else {
+                    y[i].classList.remove("select-arrow-active");
+                }
+            }
+            for (i = 0; i < xl; i++) {
+                if (arrNo.indexOf(i)) {
+                    x[i].classList.add("select-hide");
+                }
+            }
+        }
+
+        document.addEventListener("click", closeAllSelect);
+
+        // Search function
         async function searchTorrents() {
             const query = $('#query').val();
             const website = $('#website').val();
             const page = $('#page').val() || '';
             const resultsDiv = $('#results');
-            resultsDiv.html('<div style="grid-column: 1 / -1; text-align: center;">Searching the galaxy...</div>');
+            resultsDiv.html('<div style="grid-column: 1 / -1; text-align: center;">Searching the galaxy for your movies...</div>');
 
             let apiUrl = `https://itorrentsearch.vercel.app/api/${website}/${query}`;
             if (page) {
@@ -274,7 +400,7 @@
                     data.forEach(torrent => {
                         resultsDiv.append(`
                             <div class="movie-card">
-                                <img src="https://via.placeholder.com/350x500.png?text=${encodeURIComponent(torrent.Name)}" alt="${torrent.Name}">
+                                <img src="https://via.placeholder.com/300x450.png?text=${encodeURIComponent(torrent.Name)}" alt="${torrent.Name}">
                                 <div class="movie-info">
                                     <h5>${torrent.Name}</h5>
                                     <p><strong>Category:</strong> ${torrent.Category || 'N/A'}</p>
@@ -288,6 +414,7 @@
                     });
                 } else if (website === 'yts') {
                     data.forEach(movie => {
+                        resultsDiv.data.forEach(movie => {
                         resultsDiv.append(`
                             <div class="movie-card">
                                 <img src="${movie.Poster}" alt="${movie.Name}">
@@ -296,7 +423,8 @@
                                     <p><strong>Released:</strong> ${movie.ReleasedDate || 'N/A'}</p>
                                     <p><strong>Genre:</strong> ${movie.Genre || 'N/A'}</p>
                                     <p><strong>Rating:</strong> ${movie.Rating || 'N/A'}</p>
-                                    <a href="${movie.Url}" class="btn-custom">More Details</a>
+                                    <p><strong>Runtime:</strong> ${movie.Runtime || 'N/A'}</p>
+                                    <a href="${movie.Url}" class="btn-custom" target="_blank">More Details</a>
                                     ${movie.Files.map(file => `
                                         <a href="${file.Magnet}" class="btn-custom">Download ${file.Quality}</a>
                                     `).join('')}
@@ -306,7 +434,8 @@
                     });
                 }
             } catch (error) {
-                resultsDiv.html('<div style="grid-column: 1 / -1; text-align: center; color: var(--highlight-color);">Failed to load results. The space-time continuum may be disrupted.</div>');
+                resultsDiv.html('<div style="grid-column: 1 / -1; text-align: center; color: #e74c3c;">Failed to retrieve data from the space-time continuum. Please try again.</div>');
+                console.error('Error:', error);
             }
         }
     </script>
