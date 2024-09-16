@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Torrent Search Platform</title>
+    <title>Movie Search Platform</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -14,41 +14,92 @@
             padding: 20px;
         }
         header {
-            background: #333;
+            background: #222;
             color: #fff;
-            padding: 10px 0;
+            padding: 20px;
             text-align: center;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
         }
         .search-form {
-            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .search-form input,
+        .search-form select,
+        .search-form button {
+            margin-right: 10px;
+        }
+        .search-form input,
+        .search-form select {
+            border-radius: 5px;
+        }
+        .search-form button {
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .search-form button:hover {
+            background-color: #0056b3;
         }
         .result-card {
             margin-bottom: 20px;
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .poster-img {
-            max-width: 100%;
+            width: 100%;
             height: auto;
+            object-fit: cover;
+        }
+        .card-body {
+            padding: 20px;
+            background-color: #fff;
+        }
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        .card-text {
+            margin-bottom: 10px;
+        }
+        .btn-custom {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .btn-custom:hover {
+            background-color: #218838;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Torrent Search Platform</h1>
+        <h1>Movie Search Platform</h1>
     </header>
 
     <div class="container">
-        <div class="search-form d-flex flex-column flex-md-row">
-            <input type="text" id="query" class="form-control mb-2 mb-md-0" placeholder="Enter your search query...">
+        <div class="search-form d-flex flex-column flex-md-row align-items-center">
+            <input type="text" id="query" class="form-control mb-2 mb-md-0" placeholder="Enter movie name...">
             <select id="website" class="form-select mb-2 mb-md-0 ms-md-2">
                 <option value="1337x">1337x</option>
                 <option value="yts">YTS</option>
                 <!-- Add other sites as needed -->
             </select>
             <input type="number" id="page" class="form-control mb-2 mb-md-0 ms-md-2" placeholder="Page (optional)" min="1">
-            <button class="btn btn-primary ms-md-2" onClick="searchTorrents()">Search</button>
+            <button class="btn btn-custom ms-md-2" onClick="searchTorrents()">Search</button>
         </div>
 
-        <div id="results" class="mt-4">
+        <div id="results" class="row">
             <!-- Results will be displayed here -->
         </div>
     </div>
@@ -61,7 +112,7 @@
             const website = $('#website').val();
             const page = $('#page').val() || ''; // Get the page number or default to empty
             const resultsDiv = $('#results');
-            resultsDiv.html('<div class="text-center">Loading...</div>');
+            resultsDiv.html('<div class="text-center col-12">Loading...</div>');
 
             // Construct the URL with optional page parameter
             let apiUrl = `https://itorrentsearch.vercel.app/api/${website}/${query}`;
@@ -75,7 +126,7 @@
 
                 // Handle no data scenario
                 if (!data || data.length === 0) {
-                    resultsDiv.html('<div class="text-center">No results found.</div>');
+                    resultsDiv.html('<div class="text-center col-12">No results found.</div>');
                     return;
                 }
 
@@ -86,14 +137,16 @@
                 if (website === '1337x') {
                     data.forEach(torrent => {
                         resultsDiv.append(`
-                            <div class="card result-card">
-                                <div class="card-body">
-                                    <h5 class="card-title">${torrent.Name}</h5>
-                                    <p class="card-text"><strong>Category:</strong> ${torrent.Category || 'N/A'}</p>
-                                    <p class="card-text"><strong>Size:</strong> ${torrent.Size || 'N/A'}</p>
-                                    <p class="card-text"><strong>Seeders:</strong> ${torrent.Seeders || 'N/A'}</p>
-                                    <p class="card-text"><strong>Leechers:</strong> ${torrent.Leechers || 'N/A'}</p>
-                                    <a href="${torrent.Magnet}" class="btn btn-primary">Download Magnet</a>
+                            <div class="col-md-4">
+                                <div class="card result-card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${torrent.Name}</h5>
+                                        <p class="card-text"><strong>Category:</strong> ${torrent.Category || 'N/A'}</p>
+                                        <p class="card-text"><strong>Size:</strong> ${torrent.Size || 'N/A'}</p>
+                                        <p class="card-text"><strong>Seeders:</strong> ${torrent.Seeders || 'N/A'}</p>
+                                        <p class="card-text"><strong>Leechers:</strong> ${torrent.Leechers || 'N/A'}</p>
+                                        <a href="${torrent.Magnet}" class="btn btn-custom">Download Magnet</a>
+                                    </div>
                                 </div>
                             </div>
                         `);
@@ -101,27 +154,29 @@
                 } else if (website === 'yts') {
                     data.forEach(movie => {
                         resultsDiv.append(`
-                            <div class="card result-card">
-                                <img src="${movie.Poster}" alt="${movie.Name}" class="card-img-top poster-img">
-                                <div class="card-body">
-                                    <h5 class="card-title">${movie.Name}</h5>
-                                    <p class="card-text"><strong>Released Date:</strong> ${movie.ReleasedDate || 'N/A'}</p>
-                                    <p class="card-text"><strong>Genre:</strong> ${movie.Genre || 'N/A'}</p>
-                                    <p class="card-text"><strong>Rating:</strong> ${movie.Rating || 'N/A'}</p>
-                                    <p class="card-text"><strong>Likes:</strong> ${movie.Likes || 'N/A'}</p>
-                                    <p class="card-text"><strong>Runtime:</strong> ${movie.Runtime || 'N/A'}</p>
-                                    <p class="card-text"><strong>Language:</strong> ${movie.Language || 'N/A'}</p>
-                                    <a href="${movie.Url}" class="btn btn-primary">More Details</a>
-                                    <div class="mt-2">
-                                        ${movie.Files.map(file => `
-                                            <div class="mt-2">
-                                                <p><strong>Quality:</strong> ${file.Quality}</p>
-                                                <p><strong>Type:</strong> ${file.Type}</p>
-                                                <p><strong>Size:</strong> ${file.Size}</p>
-                                                <a href="${file.Torrent}" class="btn btn-secondary me-2">Download Torrent</a>
-                                                <a href="${file.Magnet}" class="btn btn-secondary">Download Magnet</a>
-                                            </div>
-                                        `).join('')}
+                            <div class="col-md-4">
+                                <div class="card result-card">
+                                    <img src="${movie.Poster}" alt="${movie.Name}" class="card-img-top poster-img">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${movie.Name}</h5>
+                                        <p class="card-text"><strong>Released Date:</strong> ${movie.ReleasedDate || 'N/A'}</p>
+                                        <p class="card-text"><strong>Genre:</strong> ${movie.Genre || 'N/A'}</p>
+                                        <p class="card-text"><strong>Rating:</strong> ${movie.Rating || 'N/A'}</p>
+                                        <p class="card-text"><strong>Likes:</strong> ${movie.Likes || 'N/A'}</p>
+                                        <p class="card-text"><strong>Runtime:</strong> ${movie.Runtime || 'N/A'}</p>
+                                        <p class="card-text"><strong>Language:</strong> ${movie.Language || 'N/A'}</p>
+                                        <a href="${movie.Url}" class="btn btn-custom">More Details</a>
+                                        <div class="mt-2">
+                                            ${movie.Files.map(file => `
+                                                <div class="mt-2">
+                                                    <p><strong>Quality:</strong> ${file.Quality}</p>
+                                                    <p><strong>Type:</strong> ${file.Type}</p>
+                                                    <p><strong>Size:</strong> ${file.Size}</p>
+                                                    <a href="${file.Torrent}" class="btn btn-secondary me-2">Download Torrent</a>
+                                                    <a href="${file.Magnet}" class="btn btn-secondary">Download Magnet</a>
+                                                </div>
+                                            `).join('')}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -129,7 +184,7 @@
                     });
                 }
             } catch (error) {
-                resultsDiv.html('<div class="text-center text-danger">Failed to load results.</div>');
+                resultsDiv.html('<div class="text-center text-danger col-12">Failed to load results.</div>');
             }
         }
     </script>
