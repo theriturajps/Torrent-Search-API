@@ -3,69 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Torrent Search</title>
+    <title>Torrent Search Platform</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Basic resets */
-        *, *:before, *:after { box-sizing: border-box; }
-        body, h1, p { margin: 0; padding: 0; }
-
         body {
             font-family: 'Roboto', sans-serif;
-            line-height: 1.6;
             background-color: #f4f4f9;
             color: #333;
             padding: 20px;
         }
-
-        /* Container for centered alignment */
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
         header {
             background: #333;
             color: #fff;
             padding: 10px 0;
             text-align: center;
         }
-
-        /* Form styles */
         .search-form {
-            display: flex;
-            justify-content: space-between;
             margin-top: 20px;
         }
-
-        .search-form input, .search-form select, .search-form button {
-            padding: 10px;
-            margin-right: 10px;
+        .result-card {
+            margin-bottom: 20px;
         }
-
-        .search-form button {
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        .search-form button:hover {
-            background-color: #0056b3;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 600px) {
-            .search-form {
-                flex-direction: column;
-            }
-
-            .search-form input, .search-form select, .search-form button {
-                margin-top: 10px;
-                margin-right: 0;
-                width: 100%;
-            }
+        .poster-img {
+            max-width: 100%;
+            height: auto;
         }
     </style>
 </head>
@@ -75,53 +37,92 @@
     </header>
 
     <div class="container">
-        <div class="search-form">
-            <input type="text" id="query" placeholder="Enter your search query...">
-            <select id="website">
+        <div class="search-form d-flex flex-column flex-md-row">
+            <input type="text" id="query" class="form-control mb-2 mb-md-0" placeholder="Enter your search query...">
+            <select id="website" class="form-select mb-2 mb-md-0 ms-md-2">
                 <option value="1337x">1337x</option>
                 <option value="yts">YTS</option>
                 <!-- Add other sites as needed -->
             </select>
-            <button onClick="searchTorrents()">Search</button>
+            <button class="btn btn-primary ms-md-2" onClick="searchTorrents()">Search</button>
         </div>
 
-        <div id="results">
+        <div id="results" class="mt-4">
             <!-- Results will be displayed here -->
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script>
         async function searchTorrents() {
-            const query = document.getElementById('query').value;
-            const website = document.getElementById('website').value;
-            const resultsDiv = document.getElementById('results');
-            resultsDiv.innerHTML = 'Loading...';
+            const query = $('#query').val();
+            const website = $('#website').val();
+            const resultsDiv = $('#results');
+            resultsDiv.html('<div class="text-center">Loading...</div>');
 
-            // Construct the URL based on the selected website
             let apiUrl = `https://itorrentsearch.vercel.app/api/${website}/${query}`;
             try {
                 const response = await fetch(apiUrl);
                 const data = await response.json();
 
                 // Handle no data scenario
-                if (data.length === 0) {
-                    resultsDiv.innerHTML = 'No results found.';
+                if (!data || data.length === 0) {
+                    resultsDiv.html('<div class="text-center">No results found.</div>');
                     return;
                 }
 
-                // Display results
-                resultsDiv.innerHTML = data.map(torrent => `
-                    <div>
-                        <h3>${torrent.Name}</h3>
-                        <p><strong>Category:</strong> ${torrent.Category || 'N/A'}</p>
-                        <p><strong>Size:</strong> ${torrent.Size || 'N/A'}</p>
-                        <p><strong>Seeders:</strong> ${torrent.Seeders || 'N/A'}</p>
-                        <p><strong>Leechers:</strong> ${torrent.Leechers || 'N/A'}</p>
-                        <a href="${torrent.Magnet}">Download Magnet</a>
-                    </div>
-                `).join('');
+                // Clear previous results
+                resultsDiv.empty();
+
+                // Display results based on the selected website
+                if (website === '1337x') {
+                    data.forEach(torrent => {
+                        resultsDiv.append(`
+                            <div class="card result-card">
+                                <div class="card-body">
+                                    <h5 class="card-title">${torrent.Name}</h5>
+                                    <p class="card-text"><strong>Category:</strong> ${torrent.Category || 'N/A'}</p>
+                                    <p class="card-text"><strong>Size:</strong> ${torrent.Size || 'N/A'}</p>
+                                    <p class="card-text"><strong>Seeders:</strong> ${torrent.Seeders || 'N/A'}</p>
+                                    <p class="card-text"><strong>Leechers:</strong> ${torrent.Leechers || 'N/A'}</p>
+                                    <a href="${torrent.Magnet}" class="btn btn-primary">Download Magnet</a>
+                                </div>
+                            </div>
+                        `);
+                    });
+                } else if (website === 'yts') {
+                    data.forEach(movie => {
+                        resultsDiv.append(`
+                            <div class="card result-card">
+                                <img src="${movie.Poster}" alt="${movie.Name}" class="card-img-top poster-img">
+                                <div class="card-body">
+                                    <h5 class="card-title">${movie.Name}</h5>
+                                    <p class="card-text"><strong>Released Date:</strong> ${movie.ReleasedDate || 'N/A'}</p>
+                                    <p class="card-text"><strong>Genre:</strong> ${movie.Genre || 'N/A'}</p>
+                                    <p class="card-text"><strong>Rating:</strong> ${movie.Rating || 'N/A'}</p>
+                                    <p class="card-text"><strong>Likes:</strong> ${movie.Likes || 'N/A'}</p>
+                                    <p class="card-text"><strong>Runtime:</strong> ${movie.Runtime || 'N/A'}</p>
+                                    <p class="card-text"><strong>Language:</strong> ${movie.Language || 'N/A'}</p>
+                                    <a href="${movie.Url}" class="btn btn-primary">More Details</a>
+                                    <div class="mt-2">
+                                        ${movie.Files.map(file => `
+                                            <div class="mt-2">
+                                                <p><strong>Quality:</strong> ${file.Quality}</p>
+                                                <p><strong>Type:</strong> ${file.Type}</p>
+                                                <p><strong>Size:</strong> ${file.Size}</p>
+                                                <a href="${file.Torrent}" class="btn btn-secondary me-2">Download Torrent</a>
+                                                <a href="${file.Magnet}" class="btn btn-secondary">Download Magnet</a>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            </div>
+                        `);
+                    });
+                }
             } catch (error) {
-                resultsDiv.innerHTML = 'Failed to load results.';
+                resultsDiv.html('<div class="text-center text-danger">Failed to load results.</div>');
             }
         }
     </script>
