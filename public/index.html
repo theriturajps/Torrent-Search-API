@@ -318,12 +318,11 @@ header h1 {
                     data.forEach(movie => {
                         resultsDiv.append(
                             `<div class="movie-card">
-                                <img src="${movie.Poster}" alt="${movie.Name}">
                                 <div class="movie-details">
                                     <h5>${movie.Name}</h5>
-                                    <p><strong>Released Date:</strong> ${movie.ReleasedDate || 'N/A'}</p>
-                                    <p><strong>Genre:</strong> ${movie.Genre || 'N/A'}</p>
-                                    <p><strong>Rating:</strong> ${movie.Rating || 'N/A'}</p>
+                                    <p><strong>DateUploaded:</strong> ${movie.DateUploaded || 'N/A'}</p>
+                                    <p><strong>Size:</strong> ${movie.Size || 'N/A'}</p>
+                                    <p><strong>Leechers:</strong> ${movie.Leechers || 'N/A'}</p>
                                     <div class="button-container">
                                         <a href="${torrent.Magnet}" class="btn-custom">Magnet</a>
                                         <a href="${torrent.Torrent}" class="btn-custom">Torrent</a>
