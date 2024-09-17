@@ -235,6 +235,7 @@ header h1 {
         <select id="website" class="form-select">
             <option value="1337x">1337x</option>
             <option value="yts">YTS</option>
+            <option value="torlock">Torlock</option>
         </select>
         <input type="number" id="page" class="form-control" placeholder="Page (optional)" min="1">
         <button onclick="searchTorrents()">Search</button>
@@ -308,6 +309,24 @@ header h1 {
                                         ${movie.Files.map(file => 
                                             `<a href="${file.Magnet}" class="btn-custom">${file.Quality}</a>`
                                         ).join('')}
+                                    </div>
+                                </div>
+                            </div>`
+                        );
+                    });
+                } else if (website === 'torlock') {
+                    data.forEach(movie => {
+                        resultsDiv.append(
+                            `<div class="movie-card">
+                                <img src="${movie.Poster}" alt="${movie.Name}">
+                                <div class="movie-details">
+                                    <h5>${movie.Name}</h5>
+                                    <p><strong>Released Date:</strong> ${movie.ReleasedDate || 'N/A'}</p>
+                                    <p><strong>Genre:</strong> ${movie.Genre || 'N/A'}</p>
+                                    <p><strong>Rating:</strong> ${movie.Rating || 'N/A'}</p>
+                                    <div class="button-container">
+                                        <a href="${torrent.Magnet}" class="btn-custom">Magnet</a>
+                                        <a href="${torrent.Torrent}" class="btn-custom">Torrent</a>
                                     </div>
                                 </div>
                             </div>`
