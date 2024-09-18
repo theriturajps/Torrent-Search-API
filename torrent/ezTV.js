@@ -8,7 +8,7 @@ async function ezTV(query) {
     let html;
     try {
         html = await axios.get(url);
-    } catch{
+    } catch {
         return null;
     }
 
@@ -35,6 +35,4 @@ async function ezTV(query) {
     return allTorrents
 }
 
-module.exports = {
-    ezTV: ezTV
-}
+module.exports = ezTV

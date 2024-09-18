@@ -39,6 +39,4 @@ async function pirateBay(query, page = '1') {
     return allTorrents
 }
 
-module.exports ={
-    pirateBay : pirateBay
-}
+module.exports = pirateBay
