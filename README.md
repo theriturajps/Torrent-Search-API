@@ -36,24 +36,24 @@ $ npm start
 
 | Website        | Keyword                                        | Url                               | Example                                                                                         |
 | -------------- | ---------------------------------------------- | --------------------------------- | ----------------------------------------------------------------------------------------------- |
-| 1337x          | 1337x                                          | <https://1337xx.to>                 | [/api/1337x/avengers](http://localhost:3001/api/1337x/avengers)                   |
-| Yts            | yts                                            | <https://yts.mx>                    | [/api/yts/avengers](http://localhost:3001/api/yts/avengers)                       |
-| Eztv           | eztv                                           | <https://eztv.re>                   | [/api/eztv/avengers](http://localhost:3001/api/eztv/avengers)                     |
-| Torrent Galaxy | tgx                                            | <https://torrentgalaxy.to>          | [/api/tgx/avengers](http://localhost:3001/api/tgx/avengers)                       |
-| Torlock        | torlock                                        | <https://www.torlock.com>           | [/api/torlock/avengers](http://localhost:3001/api/torlock/avengers)               |
-| PirateBay      | piratebay                                      | <https://thehiddenbay.com>          | [/api/piratebay/avengers](http://localhost:3001/api/piratebay/avengers)           |
-| Nyaasi      | nyaasi                                         | <https://nyaa.si>                   | [/api/nyaasi/umaru](http://localhost:3001/api/nyaasi/umaru)                       |
-| Rarbg          | rarbg                                          | <https://rargb.to>                  | [/api/rarbg/avengers](http://localhost:3001/api/rarbg/avengers)                   |
+| 1337x          | 1337x                                          | <https://1337xx.to>                 | [/api/1337x/avengers](https://itorrentsearch.vercel.app/api/1337x/avengers)                   |
+| Yts            | yts                                            | <https://yts.mx>                    | [/api/yts/avengers](https://itorrentsearch.vercel.app/api/yts/avengers)                       |
+| Eztv           | eztv                                           | <https://eztv.re>                   | [/api/eztv/avengers](https://itorrentsearch.vercel.app/api/eztv/avengers)                     |
+| Torrent Galaxy | tgx                                            | <https://torrentgalaxy.to>          | [/api/tgx/avengers](https://itorrentsearch.vercel.app/api/tgx/avengers)                       |
+| Torlock        | torlock                                        | <https://www.torlock.com>           | [/api/torlock/avengers](https://itorrentsearch.vercel.app/api/torlock/avengers)               |
+| PirateBay      | piratebay                                      | <https://thehiddenbay.com>          | [/api/piratebay/avengers](https://itorrentsearch.vercel.app/api/piratebay/avengers)           |
+| Nyaasi      | nyaasi                                         | <https://nyaa.si>                   | [/api/nyaasi/umaru](https://itorrentsearch.vercel.app/api/nyaasi/umaru)                       |
+| Rarbg          | rarbg                                          | <https://rargb.to>                  | [/api/rarbg/avengers](https://itorrentsearch.vercel.app/api/rarbg/avengers)                   |
 | ~~Ettv~~           | ~~ettv~~                                           | ~~<https://www.ettvcentral.com>~~       | DEAD                     |
 | ~~Zooqle~~         | ~~zooqle~~                                         | ~~<https://zooqle.com>~~                | DEAD                 |
-| KickAss        | kickass                                        | <https://kickasstorrents.to>        | [/api/kickass/avengers](http://localhost:3001/api/kickass/avengers)               |
-| Bitsearch      | bitsearch                                      | <https://bitsearch.to>              | [/api/bitsearch/avengers](http://localhost:3001/api/bitsearch/avengers)           |
-| Glodls         | glodls                                         | <https://glodls.to/home.php>        | [/api/glodls/avengers](http://localhost:3001/api/glodls/avengers)                 |
+| KickAss        | kickass                                        | <https://kickasstorrents.to>        | [/api/kickass/avengers](https://itorrentsearch.vercel.app/api/kickass/avengers)               |
+| Bitsearch      | bitsearch                                      | <https://bitsearch.to>              | [/api/bitsearch/avengers](https://itorrentsearch.vercel.app/api/bitsearch/avengers)           |
+| Glodls         | glodls                                         | <https://glodls.to/home.php>        | [/api/glodls/avengers](https://itorrentsearch.vercel.app/api/glodls/avengers)                 |
 | ~~MagnetDL~~       | ~~magnetdl~~                                       | ~~<https://www.magnetdl.com>~~          | DEAD            |
-| LimeTorrent    | limetorrent                                    | <https://www.limetorrents.pro/home> | [/api/limetorrent/avengers](http://localhost:3001/api/limetorrent/avengers)       |
-| TorrentFunk    | torrentfunk                                    | <https://www.torrentfunk.com>       | [/api/torrentfunk/avengers](http://localhost:3001/api/torrentfunk/avengers)       |
-| TorrentProject | torrentproject                                 | <https://torrentproject2.com>       | [/api/torrentproject/avengers](http://localhost:3001/api/torrentproject/avengers) |
-| all            | all (It will retrieve torrent from every site) |                                   | [/api/all/avengers](http://localhost:3001/api/all/avengers)                       |
+| LimeTorrent    | limetorrent                                    | <https://www.limetorrents.pro/home> | [/api/limetorrent/avengers](https://itorrentsearch.vercel.app/api/limetorrent/avengers)       |
+| TorrentFunk    | torrentfunk                                    | <https://www.torrentfunk.com>       | [/api/torrentfunk/avengers](https://itorrentsearch.vercel.app/api/torrentfunk/avengers)       |
+| TorrentProject | torrentproject                                 | <https://torrentproject2.com>       | [/api/torrentproject/avengers](https://itorrentsearch.vercel.app/api/torrentproject/avengers) |
+| all            | all (It will retrieve torrent from every site) |                                   | [/api/all/avengers](https://itorrentsearch.vercel.app/api/all/avengers)                       |
 
 ---
 
@@ -179,12 +179,12 @@ $ npm start
 ## 🔍Want to try this API ?
 
 ```
-http://localhost:3001/api/{keyword}/{query}/{page(optional)}
+https://itorrentsearch.vercel.app/api/{keyword}/{query}/{page(optional)}
 ```
 
 🔰Example
 ```
-http://localhost:3001/api/1337x/avengers/3
+https://itorrentsearch.vercel.app/api/1337x/avengers/3
 ```
 
 ---
