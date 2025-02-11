@@ -1,5 +1,10 @@
 <h1 align='center'>Torrent Searcher API with Website 🔥</h1>
 
+<div align='center'>
+
+###  New Torrent API [ArcTorrent](https://github.com/theriturajps/ArcTorrent) (Available!)
+
+</div>
 
 
 > Unofficial API for scraping torrents from 1337x, Piratebay, Eztv, Nyaasi, Torlock, YTS, Torrent Galaxy, Rarbg, Zooqle, KickAss, Bitsearch, Glodls, MagnetDL, LimeTorrent, TorrentFunk, TorrentProject and Ettv.
