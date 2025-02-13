@@ -45,6 +45,4 @@ async function nyaaSI(query, page = '1') {
     return torrents
 }
 
-module.exports = {
-    nyaaSI: nyaaSI
-}
+module.exports = nyaaSI

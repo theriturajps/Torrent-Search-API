@@ -37,6 +37,4 @@ async function zooqle(query = '', page = '1') {
     return ALLTORRENT;
 }
 
-module.exports = {
-    zooqle: zooqle
-}
+module.exports = zooqle

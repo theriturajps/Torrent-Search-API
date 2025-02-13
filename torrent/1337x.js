@@ -8,9 +8,9 @@ async function torrent1337x(query = '', page = '1') {
     const allTorrent = [];
     let html;
     const url = 'https://1337xx.to/search/' + query + '/' + page + '/';
-    try{
+    try {
         html = await axios.get(url);
-    }catch{
+    } catch {
         return null;
     }
 
@@ -28,21 +28,21 @@ async function torrent1337x(query = '', page = '1') {
         const data = {};
         const labels = ['Category', 'Type', 'Language', 'Size', 'UploadedBy', 'Downloads', 'LastChecked', 'DateUploaded', 'Seeders', 'Leechers'];
         let html;
-        try{
+        try {
             html = await axios.get(element);
-        }catch{
+        } catch {
             return null;
         }
         const $ = cheerio.load(html.data);
         data.Name = $('.box-info-heading h1').text().trim();
         data.Magnet = $('.clearfix ul li a').attr('href') || "";
         const poster = $('div.torrent-image img').attr('src');
-        
+
         if (typeof poster !== 'undefined') {
-            if (poster.startsWith('http')){
+            if (poster.startsWith('http')) {
                 data.Poster = poster;
             }
-            else{
+            else {
                 data.Poster = 'https:' + poster;
             }
         } else {
@@ -60,6 +60,5 @@ async function torrent1337x(query = '', page = '1') {
 
     return allTorrent
 }
-module.exports = {
-    torrent1337x: torrent1337x
-}
+torrent1337x.customName = "1337x"
+module.exports = torrent1337x

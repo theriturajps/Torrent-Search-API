@@ -8,7 +8,16 @@
     "start-server": "node app.js"
   },
   "keywords": [],
-  "author": "theriturajps",
+  "contributors": [
+    {
+      "name": "AirplaneGobrr",
+      "email": "github@airplanegobrr.xyz",
+      "url": "https://github.com/airplanegobrr"
+    },
+    {
+      "name": "theriturajps"
+    }
+  ],
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.1",
