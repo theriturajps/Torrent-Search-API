@@ -83,6 +83,4 @@ async function yts(query, page = '1') {
 }
 
 
-module.exports = {
-    yts: yts
-}
+module.exports = yts

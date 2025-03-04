@@ -4,7 +4,7 @@ const axios = require('axios');
 async function torLock(query = '', page = '1') {
 
     const ALLTORRENT = [];
-    const ALLURL =[]
+    const ALLURL = []
     const url = encodeURI('https://www.torlock.com/all/torrents/' + query + '/' + page + '.html');
     let html;
     try {
@@ -58,6 +58,4 @@ async function torLock(query = '', page = '1') {
 }
 
 
-module.exports = {
-    torLock: torLock
-}
+module.exports = torLock
